@@ -69,7 +69,7 @@ export class AATToken {
     const header: TokenHeader = JSON.parse(base64urlDecode(headerB64));
     const payload: TokenPayload = JSON.parse(base64urlDecode(payloadB64));
     const delegationChain: DelegationToken[] = JSON.parse(base64urlDecode(delegationB64));
-    const signature = Buffer.from(base64urlDecode(signatureB64), 'utf8');
+    const signature = Buffer.from(signatureB64, 'base64url');
 
     // Verify signature
     const signingInput = `${headerB64}.${payloadB64}.${delegationB64}`;

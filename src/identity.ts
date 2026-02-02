@@ -1,10 +1,16 @@
 import * as ed from '@noble/ed25519';
+import { sha512 } from '@noble/hashes/sha512';
 
 // Use crypto for hashing (Node.js built-in)
 const crypto = require('crypto');
 
 // Type cast for ed25519
 const ed25519 = ed as any;
+
+// Configure SHA-512 for @noble/ed25519 v2.x
+if (!ed25519.etc.sha512Sync) {
+  ed25519.etc.sha512Sync = (...m: Uint8Array[]) => sha512(ed25519.etc.concatBytes(...m));
+}
 
 /**
  * AgentAuth Identity - Decentralized identity for autonomous agents

@@ -4,16 +4,25 @@ module.exports = {
   roots: ['<rootDir>/src'],
   testMatch: ['**/__tests__/**/*.ts', '**/?(*.)+(spec|test).ts'],
   transform: {
-    '^.+\\.ts$': 'ts-jest',
+    '^.+\\.ts$': ['ts-jest', {
+      tsconfig: {
+        esModuleInterop: true,
+        allowSyntheticDefaultImports: true,
+      },
+    }],
+    '^.+\\.js$': ['ts-jest', {
+      tsconfig: {
+        allowJs: true,
+        esModuleInterop: true,
+        allowSyntheticDefaultImports: true,
+      },
+    }],
   },
   transformIgnorePatterns: [
-    'node_modules/(?!(@noble)/)',
+    'node_modules/(?!(@noble/ed25519|@noble/hashes)/)',
   ],
-  extensionsToTreatAsEsm: ['.ts'],
-  globals: {
-    'ts-jest': {
-      useESM: true,
-    },
+  moduleNameMapper: {
+    '^@noble/(.*)$': '<rootDir>/node_modules/@noble/$1',
   },
   collectCoverageFrom: [
     'src/**/*.ts',

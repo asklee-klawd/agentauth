@@ -213,7 +213,9 @@ describe('AATToken', () => {
       });
 
       const parts = token.split('.');
-      parts[3] = Buffer.from('invalid').toString('base64url');
+      // Create a 64-byte invalid signature (Ed25519 signature size)
+      const invalidSig = Buffer.alloc(64, 0xff);
+      parts[3] = invalidSig.toString('base64url');
       const tamperedToken = parts.join('.');
 
       await expect(AATToken.verify(tamperedToken))
