@@ -4,6 +4,13 @@
   "description": "AgentAuth Protocol - Authentication and identity for autonomous AI agents",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
     "build": "tsc",
     "test": "echo \"Tests coming soon\"",
