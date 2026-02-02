@@ -6,6 +6,12 @@ export type {
   DelegationConstraints
 } from './DelegationRequestModal';
 
+export { AgentSelector } from './AgentSelector';
+export type {
+  Agent,
+  AgentSelectorProps
+} from './AgentSelector';
+
 // Hooks
 export { useAgentAuth, useAATToken } from './useAgentAuth';
 export type {
