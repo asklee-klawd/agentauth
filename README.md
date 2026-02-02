@@ -4,6 +4,11 @@
 
 > Decentralized identity (DIDs) + cryptographic delegation + granular permissions + built-in audit
 
+[![Tests](https://github.com/asklee-klawd/agentauth/workflows/Test%20&%20Coverage/badge.svg)](https://github.com/asklee-klawd/agentauth/actions)
+[![Coverage](https://codecov.io/gh/asklee-klawd/agentauth/branch/main/graph/badge.svg)](https://codecov.io/gh/asklee-klawd/agentauth)
+[![npm version](https://badge.fury.io/js/@agentauth%2Fcore.svg)](https://www.npmjs.com/package/@agentauth/core)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ---
 
 ## The Problem
@@ -276,6 +281,78 @@ AgentAuth builds on proven standards (DIDs, Ed25519, JWT) while solving agent-sp
 - [ ] Delegation UI (browser extension)
 - [ ] Registry implementation
 - [ ] Hardware key support
+
+---
+
+## 🧪 Testing
+
+**Coverage Requirement:** 95% minimum
+
+### Run Tests
+
+```bash
+# Install dependencies
+npm install
+
+# Run all tests
+npm test
+
+# Watch mode (development)
+npm run test:watch
+
+# Generate coverage report
+npm run test:coverage
+
+# CI mode
+npm run test:ci
+```
+
+### Test Suites
+
+**Identity Tests (identity.test.ts):**
+- Identity creation with Ed25519 keypairs
+- DID generation and format validation
+- Key import/export (hex format)
+- Signing and verification
+- JSON serialization/deserialization
+- Edge cases (empty messages, large messages, unicode)
+- Concurrent operations
+
+**Token Tests (token.test.ts):**
+- AAT token creation with all parameters
+- Token encoding (header + payload + delegation + signature)
+- Expiry handling (1s to 365d)
+- Signature verification
+- Audience validation
+- Scope checking
+- Token methods (getAgent, getDelegator, hasScope)
+- Tamper detection
+- Concurrent creation/verification
+
+**Delegation Tests (delegation.test.ts):**
+- Delegation token creation
+- Constraint handling (maxUses, timeWindows, MFA, etc.)
+- Revocation endpoints
+- Time-based validation (notBefore, notAfter)
+- Scope management (wildcards, hierarchies)
+- Verification logic
+
+**Total: 100+ test cases covering:**
+- ✅ All public API methods
+- ✅ Error handling
+- ✅ Edge cases
+- ✅ Security validations
+- ✅ Concurrent operations
+- ✅ Format compliance
+
+### CI/CD
+
+GitHub Actions automatically:
+- Runs tests on Node.js 16, 18, and 20
+- Generates coverage reports
+- Enforces 95% threshold (build fails if below)
+- Uploads to Codecov
+- Comments coverage on PRs
 
 ---
 
